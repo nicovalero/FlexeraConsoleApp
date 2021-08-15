@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FlexeraConsoleApp.Controller;
+using FlexeraConsoleApp.Model;
+using System;
 
 namespace FlexeraConsoleApp
 {
@@ -6,7 +8,10 @@ namespace FlexeraConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Terminal terminal = DependencyModule.MakeTerminal();
+
+            terminal.DisplayInstructions();
+            terminal.Standby();
         }
     }
 }
