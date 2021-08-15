@@ -27,12 +27,11 @@ namespace FlexeraConsoleApp.Model
 
                 if (location.ToLower() != EXIT)
                 {
-                    List<Tuple<string, int>> licenses = _controller.GetAppLicensesNeeded(location);
+                    int licenses = _controller.GetTotalAppLicensesNeeded(location);
 
-                    if (licenses != null)
+                    if (licenses != -1)
                     {
-                        foreach(Tuple<string,int> t in licenses)
-                            DisplayLicensesNeeded(t);
+                        DisplayTotalLicensesNeeded(licenses);
                     }
                     else
                     {
@@ -43,9 +42,14 @@ namespace FlexeraConsoleApp.Model
             }
         }
 
-        public void DisplayLicensesNeeded(Tuple<string,int> info)
+        public void DisplayLicensesNeededPerUserAndApp(LicenseReport report)
         {
-            DisplayMessage("Number of licenses for Application " + info.Item1 + ": " + info.Item2 + "\n");
+            DisplayMessage("Number of licenses for Application " + report._applicationID + " for the User with ID " + report._userID + ": " + report._licenseCount + "\n");
+        }
+
+        public void DisplayTotalLicensesNeeded(int licenses)
+        {
+            DisplayMessage("Number of licenses needed: " + licenses + "\n");
         }
 
         public void DisplayRoadError(string path)

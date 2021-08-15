@@ -14,6 +14,11 @@ namespace FlexeraConsoleApp.Model
         public string _computerType { get; private set; }
         public string _comment { get; private set; }
 
+        public Record()
+        {
+
+        }
+
         public Record(string value)
         {
             string[] values = value.Split(",", StringSplitOptions.RemoveEmptyEntries);

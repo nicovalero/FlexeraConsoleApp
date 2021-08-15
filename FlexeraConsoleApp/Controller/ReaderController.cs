@@ -19,10 +19,18 @@ namespace FlexeraConsoleApp.Controller
             _appLicenses = appLicenses;
         }
 
-        public List<Tuple<string, int>> GetAppLicensesNeeded(string location)
+        public List<LicenseReport> GetAppLicensesNeeded(string location)
         {
             List<Record> list = _flexeraService.GetFileRecords(location);
-            List<Tuple<string, int>> licenses = _appLicenses.GetNumberOfLicenses(list);
+            List<LicenseReport> licenseReports = _appLicenses.GetNumberOfLicensesPerUserAndApp(list);
+
+            return licenseReports;
+        }
+
+        public int GetTotalAppLicensesNeeded(string location)
+        {
+            List<Record> list = _flexeraService.GetFileRecords(location);
+            int licenses = _appLicenses.GetNumberOfLicenses(list);
 
             return licenses;
         }
