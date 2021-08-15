@@ -2,6 +2,7 @@
 using FlexeraConsoleApp.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,15 @@ namespace FlexeraConsoleApp.Controller
             List<LicenseReport> licenseReports = _appLicenses.GetNumberOfLicensesPerUserAndApp(list);
 
             return licenseReports;
+        }
+
+        public bool FileIsReadable(string location)
+        {
+            string path = Path.GetFullPath(location);
+            if (File.Exists(path))
+                return true;
+            else
+                return false;
         }
 
         public int GetTotalAppLicensesNeeded(string location)

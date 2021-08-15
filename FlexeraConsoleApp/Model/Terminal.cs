@@ -1,6 +1,7 @@
 ﻿using FlexeraConsoleApp.Controller;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,16 +28,26 @@ namespace FlexeraConsoleApp.Model
 
                 if (location.ToLower() != EXIT)
                 {
-                    int licenses = _controller.GetTotalAppLicensesNeeded(location);
-
-                    if (licenses != -1)
+                    try
                     {
-                        DisplayTotalLicensesNeeded(licenses);
+                        if (_controller.FileIsReadable(location))
+                        {
+                            int licenses = _controller.GetTotalAppLicensesNeeded(location);
+                            if (licenses != -1)
+                            {
+                                DisplayTotalLicensesNeeded(licenses);
+                            }
+                            else
+                            {
+                                DisplayLicenseError();
+                            }
+                        }
+                        else
+                            DisplayPathError(location);
                     }
-                    else
+                    catch(Exception ex)
                     {
-                        DisplayRoadError(location);
-                        //TerminateApplication();
+                        DisplayUnreadableError();
                     }
                 }
             }
@@ -44,7 +55,7 @@ namespace FlexeraConsoleApp.Model
 
         public void DisplayLicensesNeededPerUserAndApp(LicenseReport report)
         {
-            DisplayMessage("Number of licenses for Application " + report._applicationID + " for the User with ID " + report._userID + ": " + report._licenseCount + "\n");
+            DisplayMessage("Number of licenses for Application " + report._applicationID + " and the User with ID " + report._userID + ": " + report._licenseCount + "\n");
         }
 
         public void DisplayTotalLicensesNeeded(int licenses)
@@ -52,9 +63,19 @@ namespace FlexeraConsoleApp.Model
             DisplayMessage("Number of licenses needed: " + licenses + "\n");
         }
 
-        public void DisplayRoadError(string path)
+        public void DisplayPathError(string path)
         {
-            DisplayMessage(path + " is not a valid path.\n");
+            DisplayMessage(path + " is not a valid path, or file does not exist.\n");
+        }
+
+        public void DisplayLicenseError()
+        {
+            DisplayMessage("Could not check the number of licenses for this file.\n");
+        }
+
+        public void DisplayUnreadableError()
+        {
+            DisplayMessage("Could not read the file.\n");
         }
 
         public void DisplayMessage(string message)
