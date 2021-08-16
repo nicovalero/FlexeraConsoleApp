@@ -11,10 +11,10 @@ namespace FlexeraConsoleApp.Controller
 {
     public class ReaderController
     {
-        private FlexeraService _flexeraService;
-        private ApplicationLicenses _appLicenses;
+        private IFlexeraService _flexeraService;
+        private IApplicationLicenses _appLicenses;
 
-        public ReaderController(FlexeraService service, ApplicationLicenses appLicenses)
+        public ReaderController(IFlexeraService service, IApplicationLicenses appLicenses)
         {
             _flexeraService = service;
             _appLicenses = appLicenses;
@@ -37,10 +37,10 @@ namespace FlexeraConsoleApp.Controller
                 return false;
         }
 
-        public int GetTotalAppLicensesNeeded(string location)
+        public int? GetTotalAppLicensesNeeded(string location)
         {
             List<Record> list = _flexeraService.GetFileRecords(location);
-            int licenses = _appLicenses.GetNumberOfLicenses(list);
+            int? licenses = _appLicenses.GetNumberOfLicenses(list);
 
             return licenses;
         }

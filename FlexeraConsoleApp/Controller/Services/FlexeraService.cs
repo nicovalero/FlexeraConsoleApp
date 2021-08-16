@@ -8,7 +8,12 @@ using System.Threading.Tasks;
 
 namespace FlexeraConsoleApp.Controller.Services
 {
-    public class FlexeraService
+
+    public interface IFlexeraService
+    {
+        public List<Record> GetFileRecords(string location);
+    }
+    public class FlexeraService : IFlexeraService
     {
         private ICSVReaderService _service;
         public FlexeraService(ICSVReaderService service)
@@ -37,6 +42,8 @@ namespace FlexeraConsoleApp.Controller.Services
                     }
                 }
             }
+            else
+                return null;
 
             return records;
         }

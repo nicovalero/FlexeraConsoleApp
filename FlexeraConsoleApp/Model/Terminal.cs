@@ -32,10 +32,10 @@ namespace FlexeraConsoleApp.Model
                     {
                         if (_controller.FileIsReadable(location))
                         {
-                            int licenses = _controller.GetTotalAppLicensesNeeded(location);
-                            if (licenses != -1)
+                            int? licenses = _controller.GetTotalAppLicensesNeeded(location);
+                            if (licenses != null)
                             {
-                                DisplayTotalLicensesNeeded(licenses);
+                                DisplayTotalLicensesNeeded(licenses.Value);
                             }
                             else
                             {

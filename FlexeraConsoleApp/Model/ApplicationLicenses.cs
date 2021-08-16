@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace FlexeraConsoleApp.Model
 {
-    public class ApplicationLicenses
+    public interface IApplicationLicenses
+    {
+        public List<LicenseReport> GetNumberOfLicensesPerUserAndApp(List<Record> list);
+        public int? GetNumberOfLicenses(List<Record> list);
+        public List<LicenseReport> GetLicenseReports(List<Record> list);
+    }
+    public class ApplicationLicenses : IApplicationLicenses
     {
         public List<LicenseReport> GetNumberOfLicensesPerUserAndApp(List<Record> list)
         {
@@ -19,7 +25,7 @@ namespace FlexeraConsoleApp.Model
                 return null;
         }
 
-        public int GetNumberOfLicenses(List<Record> list)
+        public int? GetNumberOfLicenses(List<Record> list)
         {
             if (list != null)
             {
@@ -32,10 +38,10 @@ namespace FlexeraConsoleApp.Model
                 return count;
             }
             else
-                return -1;
+                return null;
         }
 
-        private List<LicenseReport> GetLicenseReports(List<Record> list)
+        public List<LicenseReport> GetLicenseReports(List<Record> list)
         {
             //The following GroupBy serves to remove the duplicates
             var duplicatesRemoved = (from r in list
