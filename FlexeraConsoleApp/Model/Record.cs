@@ -8,11 +8,11 @@ namespace FlexeraConsoleApp.Model
 {
     public class Record
     {
-        public string _computerID { get; private set; }
-        public string _userID { get; private set; }
-        public string _applicationID { get; private set; }
-        public string _computerType { get; private set; }
-        public string _comment { get; private set; }
+        public string _computerID { get; set; }
+        public string _userID { get; set; }
+        public string _applicationID { get; set; }
+        public string _computerType { get; set; }
+        public string _comment { get; set; }
 
         public Record()
         {

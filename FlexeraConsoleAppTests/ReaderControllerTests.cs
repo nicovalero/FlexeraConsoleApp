@@ -34,7 +34,7 @@ namespace FlexeraConsoleAppTests
         [TestMethod]
         public void NullIsRetrieved_WHEN_serviceIsSuccessful_AND_fileIsNotFound()
         {
-            string location = "\\file\\unit-test.csv";
+            string location = "any";
             _flexeraService.GetFileRecordsResult = null;
             _applicationLicenses.GetNumberOfLicensesResult = null;
 
@@ -46,7 +46,7 @@ namespace FlexeraConsoleAppTests
         [TestMethod]
         public void NumberOfLicensesIsNotNull_WHEN_serviceIsSuccessful_AND_fileIsFound()
         {
-            string location = "\\file\\unit-test.csv";
+            string location = "any";
             List<Record> list = new List<Record>();
             Record record = new Record();
             list.Add(record);

@@ -54,7 +54,7 @@ namespace FlexeraConsoleApp.Model
                                          _applicationID = grp.Key._applicationID
                                      }).Distinct().ToList();
 
-            //Calculation of two lists: one for desktops and one for laptops
+            //Calculation of two lists: one for desktops and one for laptops; and grouping
             var desktops = (from r in duplicatesRemoved
                             where r._computerType.ToLower() == "desktop"
                             group r by new { r._applicationID, r._computerID, r._userID, r._computerType } into grp

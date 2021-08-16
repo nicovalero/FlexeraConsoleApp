@@ -53,11 +53,6 @@ namespace FlexeraConsoleApp.Model
             }
         }
 
-        public void DisplayLicensesNeededPerUserAndApp(LicenseReport report)
-        {
-            DisplayMessage("Number of licenses for Application " + report._applicationID + " and the User with ID " + report._userID + ": " + report._licenseCount + "\n");
-        }
-
         public void DisplayTotalLicensesNeeded(int licenses)
         {
             DisplayMessage("Number of licenses needed: " + licenses + "\n");
